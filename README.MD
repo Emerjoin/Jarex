@@ -1,5 +1,6 @@
 
-# Adding to your project
+# Adding Jarex to your project
+You must add a repository and a dependency to your __pom.xml__
 
 ## Repository
 ```xml
