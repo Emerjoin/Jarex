@@ -10,7 +10,7 @@
             <url>https://github.com/Emerjoin/maven-repo/raw/master</url>
         </repository>
     </repositories>
-```xml
+```
 
 
 ## Dependency
@@ -20,7 +20,7 @@
          <artifactId>Jarex</artifactId>
          <version>1.0.0</version>
     </dependency>
-```xml
+```
 
 # Usage Examples
 
