@@ -39,15 +39,14 @@
     Query beansXML = Queries.fileEntry("META-INF/beans.xml");
     
     ClassLoader classLoader = //get classloader here
-    ResultsWrapper results = Jarex.createInstance(classLoader)
+    Jarex jarex = Jarex.createInstance(classLoader)
         .one(persistenceXML)
-        .all(beansXML)
-        .withResults();
-    
-    
-    Optional<ResultsWrapper.Item> persistenceDescriptor = results.of(persistenceXML).findFirst();
+        .all(beansXML);
+   
+    Optional<ResultsWrapper.Item> persistenceDescriptor = jarex.withResults()
+        .of(persistenceXML).findFirst();
      
-    results.of(beansXML).forEach(item -> {
+    jarex.withResults().of(beansXML).forEach(item -> {
                          
          InputStream stream = item.getInputStream();
          //do whatever you want here
