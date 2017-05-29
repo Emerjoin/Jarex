@@ -1,6 +1,6 @@
 # Usage Examples
 
-## Looking for beans.xml in all jars of a ClassLoader
+## Looking for beans.xml in all jars
 
 ```java
     
