@@ -1,6 +1,6 @@
 # Usage Examples
 
-## Looking for every beans.xml in all jars of a ClassLoader
+## Looking for beans.xml in all jars of a ClassLoader
 
 ```java
     
@@ -18,7 +18,7 @@
     
 ```
 
-## Looking for one persistence.xml in all jars of a ClassLoader
+## Looking for persistence.xml
 
 ```java
     
