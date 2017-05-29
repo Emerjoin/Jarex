@@ -1,3 +1,27 @@
+
+# Adding to your project
+
+## Repository
+```xml
+   <repositories>
+        <repository>
+            <id>Emerjoin</id>
+            <name>maven-repo</name>
+            <url>https://github.com/Emerjoin/maven-repo/raw/master</url>
+        </repository>
+    </repositories>
+```xml
+
+
+## Dependency
+```xml
+    <dependency>
+         <groupId>org.emerjoin</groupId>
+         <artifactId>Jarex</artifactId>
+         <version>1.0.0</version>
+    </dependency>
+```xml
+
 # Usage Examples
 
 ## Looking for beans.xml in all jars
