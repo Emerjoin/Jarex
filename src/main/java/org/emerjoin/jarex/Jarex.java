@@ -105,7 +105,7 @@ public class Jarex {
 
     }
 
-    public Jarex findFirst(Query... queries){
+    public Jarex one(Query... queries){
 
         mapQueries(MatchMode.FIRST,queries);
         return this;
@@ -113,7 +113,7 @@ public class Jarex {
     }
 
 
-    public Jarex find(Query... queries){
+    public Jarex all(Query... queries){
 
         mapQueries(MatchMode.ALL,queries);
         return this;

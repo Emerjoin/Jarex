@@ -40,7 +40,7 @@ public class JarexTest extends BaseTestClazz {
 
         File jarFile =  createJar(new File(JAR_1_EXAMPLE_XML));
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jarFile)));
-        jarex.find(exampleXml);
+        jarex.all(exampleXml);
         long total = jarex.withResults().of(exampleXml).count();
         assertEquals(1,total);
         Optional<ResultsWrapper.Item> item = jarex.withResults().of(exampleXml).findFirst();
@@ -60,8 +60,8 @@ public class JarexTest extends BaseTestClazz {
         File jar3 =  createJar(new File(JAR_3_WELCOME_XML));
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2), getURL(jar3)));
-        jarex.find(exampleXml);
-        jarex.findFirst(welcomeXml);
+        jarex.all(exampleXml);
+        jarex.one(welcomeXml);
         assertEquals(2,jarex.withResults().of(exampleXml).count());
         assertEquals(1,jarex.withResults().of(welcomeXml).count());
 
@@ -77,7 +77,7 @@ public class JarexTest extends BaseTestClazz {
         File jar2 =  createJar(new File(JAR_2_EXAMPLE_XML));
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2)));
-        jarex.findFirst(exampleXml);
+        jarex.one(exampleXml);
         assertEquals(1,jarex.withResults().of(exampleXml).count());
 
     }
@@ -125,7 +125,7 @@ public class JarexTest extends BaseTestClazz {
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2)));
         jarex.disable(FileEntryMatcher.class)
-                .findFirst(exampleXml)
+                .one(exampleXml)
                 .getResult();
 
 
@@ -138,7 +138,7 @@ public class JarexTest extends BaseTestClazz {
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1)));
         jarex.disable(FileEntryMatcher.class)
-                .find()
+                .all()
                 .getResult();
 
 
@@ -151,7 +151,7 @@ public class JarexTest extends BaseTestClazz {
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1)));
         jarex.disable(FileEntryMatcher.class)
-                .findFirst()
+                .one()
                 .getResult();
 
     }
