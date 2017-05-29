@@ -24,7 +24,7 @@ public class Jarex {
 
     private List<Class> disabledMatchers = new ArrayList<Class>();
     private List<Matcher> matchers = new ArrayList<Matcher>();
-    private List<URL> urlList = null;
+    private Collection<URL> urlList = null;
 
     private Map<Query,MatchMode> queriesMap = new HashMap<Query, MatchMode>();
     private Map<Query,List<MatchItem>> matchGroups = new HashMap<>();
@@ -45,7 +45,7 @@ public class Jarex {
 
     }
 
-    public static Jarex createInstance(List<URL> classpath){
+    public static Jarex createInstance(Collection<URL> classpath){
 
         return new Jarex(classpath);
 
@@ -57,7 +57,7 @@ public class Jarex {
 
     }
 
-    private Jarex(List<URL> urls){
+    private Jarex(Collection<URL> urls){
 
         if(urls.size()==0)
             throw new IllegalArgumentException("At least one URL is required to proceed");
