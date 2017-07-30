@@ -5,10 +5,10 @@ import org.emerjoin.jarex.impl.EntryNamePartQuery;
 /**
  * @author Mario Junior.
  */
-public class EntryNameStartsWithQuery extends EntryNamePartQuery {
+public class FileEntryNameStartsWithQuery extends EntryNamePartQuery {
 
 
-    public EntryNameStartsWithQuery(String part){
+    public FileEntryNameStartsWithQuery(String part){
         super(part);
     }
 

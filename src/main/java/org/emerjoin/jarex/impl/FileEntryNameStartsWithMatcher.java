@@ -2,8 +2,7 @@ package org.emerjoin.jarex.impl;
 
 import org.emerjoin.jarex.MatchContext;
 import org.emerjoin.jarex.Matcher;
-import org.emerjoin.jarex.query.EntryNameEndsWithQuery;
-import org.emerjoin.jarex.query.EntryNameStartsWithQuery;
+import org.emerjoin.jarex.query.FileEntryNameStartsWithQuery;
 import org.emerjoin.jarex.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,29 +16,29 @@ import java.util.stream.Collectors;
 /**
  * @author Mário Júnior
  */
-public class EntryNameStartsWithMatcher implements Matcher {
+public class FileEntryNameStartsWithMatcher implements Matcher {
 
-    private static Logger _log = LoggerFactory.getLogger(EntryNameStartsWithMatcher.class);
+    private static Logger _log = LoggerFactory.getLogger(FileEntryNameStartsWithMatcher.class);
 
     public boolean supports(Query query) {
 
-        return query instanceof EntryNameStartsWithQuery;
+        return query instanceof FileEntryNameStartsWithQuery;
 
     }
 
     @Override
     public boolean doMatch(MatchContext context, Query query, URL url) {
 
-        EntryNameStartsWithQuery q = (EntryNameStartsWithQuery) query;
+        FileEntryNameStartsWithQuery q = (FileEntryNameStartsWithQuery) query;
         JarFile jarFile = context.getJar(url);
         String part = q.getPart();
 
-        List<JarEntry> entryList = jarFile.stream().filter(entry -> entry.getName().startsWith(part))
+        List<JarEntry> entryList = jarFile.stream().filter(entry -> entry.getName().startsWith(part) && !entry.isDirectory())
                 .collect(Collectors.toList());
 
         entryList.forEach(entry -> {
             if (_log.isDebugEnabled())
-                _log.debug(String.format("Entry name [%s] starts with [%s]", entry.getName(), part));
+                _log.debug(String.format("Hit: File Entry name [%s] starts with [%s]", entry.getName(), part));
             context.publishMatch(q, context.createMatch(url, entry));
         });
 

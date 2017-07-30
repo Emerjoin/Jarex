@@ -5,9 +5,9 @@ import org.emerjoin.jarex.impl.EntryNamePartQuery;
 /**
  * @author Mario Junior.
  */
-public class EntryNameEndsWithQuery extends EntryNamePartQuery {
+public class FileEntryNameEndsWithQuery extends EntryNamePartQuery {
 
-    public EntryNameEndsWithQuery(String part){
+    public FileEntryNameEndsWithQuery(String part){
         super(part);
     }
 
