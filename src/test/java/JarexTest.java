@@ -1,7 +1,9 @@
 import org.emerjoin.jarex.Jarex;
 import org.emerjoin.jarex.JarexException;
 import org.emerjoin.jarex.ResultsWrapper;
+import org.emerjoin.jarex.impl.FileEntryNameEndsWithMatcher;
 import org.emerjoin.jarex.impl.FileEntryNameEqualsMatcher;
+import org.emerjoin.jarex.impl.FileEntryNameStartsWithMatcher;
 import org.emerjoin.jarex.query.Queries;
 import org.emerjoin.jarex.query.Query;
 import org.junit.Test;
@@ -125,6 +127,8 @@ public class JarexTest extends BaseTestClazz {
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2)));
         jarex.disable(FileEntryNameEqualsMatcher.class)
+                .disable(FileEntryNameEndsWithMatcher.class)
+                .disable(FileEntryNameStartsWithMatcher.class)
                 .one(exampleXml)
                 .getResult();
 
