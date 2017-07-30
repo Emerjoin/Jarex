@@ -17,7 +17,7 @@ public class BaseTestClazz {
 
         try {
 
-            File tempJarFile = File.createTempFile("jarex", "test");
+            File tempJarFile = File.createTempFile("jarex", "test.jar");
 
             JavaArchive archive = ShrinkWrap.create(JavaArchive.class);
             ArchivePath pathToPickersXML = ArchivePaths.create("META-INF/"+metaInfXml.getName());

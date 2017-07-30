@@ -2,7 +2,7 @@ package org.emerjoin.jarex.impl;
 
 import org.emerjoin.jarex.MatchContext;
 import org.emerjoin.jarex.Matcher;
-import org.emerjoin.jarex.query.FileEntryQuery;
+import org.emerjoin.jarex.query.EntryNameEqualsQuery;
 import org.emerjoin.jarex.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +14,20 @@ import java.util.jar.JarFile;
 /**
  * @author Mário Júnior
  */
-public class FileEntryMatcher implements Matcher {
+public class EntryNameEqualsMatcher implements Matcher {
 
-    private static Logger _log = LoggerFactory.getLogger(FileEntryMatcher.class);
+    private static Logger _log = LoggerFactory.getLogger(EntryNameEqualsMatcher.class);
 
     public boolean supports(Query query) {
 
-        return query instanceof FileEntryQuery;
+        return query instanceof EntryNameEqualsQuery;
 
     }
 
     @Override
     public boolean doMatch(MatchContext context, Query query, URL url) {
 
-        FileEntryQuery q = (FileEntryQuery) query;
+        EntryNameEqualsQuery q = (EntryNameEqualsQuery) query;
         JarFile jarFile = context.getJar(url);
         String path = q.getPath();
 

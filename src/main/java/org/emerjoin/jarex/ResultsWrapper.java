@@ -4,6 +4,9 @@ import org.emerjoin.jarex.query.Query;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.stream.Stream;
 
 /**
@@ -36,6 +39,24 @@ public class ResultsWrapper {
         public MatchItem getMatchItem() {
 
             return matchItem;
+        }
+
+        public URL getURL(){
+
+            URL url = null;
+            String path = "jar:"+this.matchItem.getJarURL().toExternalForm()+"!/"+this.matchItem.getEntry().getName();
+
+            try {
+
+                url = URI.create(path).toURL();
+
+            }catch (MalformedURLException ex){
+
+
+            }
+
+            return url;
+
         }
 
     }

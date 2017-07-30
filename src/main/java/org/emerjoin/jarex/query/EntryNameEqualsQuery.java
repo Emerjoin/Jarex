@@ -3,11 +3,11 @@ package org.emerjoin.jarex.query;
 /**
  * @author Mário Júnior
  */
-public class FileEntryQuery implements Query {
+public class EntryNameEqualsQuery implements Query {
 
     private String path;
 
-    public FileEntryQuery(String path){
+    public EntryNameEqualsQuery(String path){
 
         this.path = path;
 

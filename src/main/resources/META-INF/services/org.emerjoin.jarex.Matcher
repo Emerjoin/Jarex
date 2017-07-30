@@ -1,1 +1,1 @@
-org.emerjoin.jarex.impl.FileEntryMatcher
+org.emerjoin.jarex.impl.EntryNameEqualsMatcher

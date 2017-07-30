@@ -1,7 +1,7 @@
 import org.emerjoin.jarex.Jarex;
 import org.emerjoin.jarex.JarexException;
 import org.emerjoin.jarex.ResultsWrapper;
-import org.emerjoin.jarex.impl.FileEntryMatcher;
+import org.emerjoin.jarex.impl.EntryNameEqualsMatcher;
 import org.emerjoin.jarex.query.Queries;
 import org.emerjoin.jarex.query.Query;
 import org.junit.Test;
@@ -62,8 +62,8 @@ public class JarexTest extends BaseTestClazz {
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2), getURL(jar3)));
         jarex.all(exampleXml);
         jarex.one(welcomeXml);
-        assertEquals(2,jarex.withResults().of(exampleXml).count());
-        assertEquals(1,jarex.withResults().of(welcomeXml).count());
+        assertEquals(2, jarex.withResults().of(exampleXml).count());
+        assertEquals(1, jarex.withResults().of(welcomeXml).count());
 
     }
 
@@ -124,7 +124,7 @@ public class JarexTest extends BaseTestClazz {
         File jar2 =  createJar(new File(JAR_2_EXAMPLE_XML));
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2)));
-        jarex.disable(FileEntryMatcher.class)
+        jarex.disable(EntryNameEqualsMatcher.class)
                 .one(exampleXml)
                 .getResult();
 
@@ -137,7 +137,7 @@ public class JarexTest extends BaseTestClazz {
         File jar1 =  createJar(new File(JAR_1_EXAMPLE_XML));
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1)));
-        jarex.disable(FileEntryMatcher.class)
+        jarex.disable(EntryNameEqualsMatcher.class)
                 .all()
                 .getResult();
 
@@ -150,9 +150,25 @@ public class JarexTest extends BaseTestClazz {
         File jar1 =  createJar(new File(JAR_1_EXAMPLE_XML));
 
         Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1)));
-        jarex.disable(FileEntryMatcher.class)
+        jarex.disable(EntryNameEqualsMatcher.class)
                 .one()
                 .getResult();
+
+    }
+
+    @Test
+    public void find_all_entries_name_ends_with_must_return_3_hits() throws Exception{
+
+        Query endsWithXml = Queries.entryNameEndsWith(".xml");
+
+        File jar1 =  createJar(new File(JAR_1_EXAMPLE_XML));
+        File jar2 =  createJar(new File(JAR_2_EXAMPLE_XML));
+        File jar3 =  createJar(new File(JAR_3_WELCOME_XML));
+
+        Jarex jarex = Jarex.createInstance(Arrays.asList(getURL(jar1), getURL(jar2), getURL(jar3)))
+                .all(endsWithXml);
+
+        assertEquals(3,jarex.withResults().of(endsWithXml).count());
 
     }
 
