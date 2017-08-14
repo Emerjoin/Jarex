@@ -31,6 +31,9 @@ public class FileEntryNameStartsWithMatcher implements Matcher {
 
         FileEntryNameStartsWithQuery q = (FileEntryNameStartsWithQuery) query;
         JarFile jarFile = context.getJar(url);
+        if(jarFile==null)
+            return false;
+
         String part = q.getPart();
 
         List<JarEntry> entryList = jarFile.stream().filter(entry -> entry.getName().startsWith(part) && !entry.isDirectory())

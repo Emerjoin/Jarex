@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.net.*;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -186,21 +186,35 @@ public class Jarex {
     }
 
     protected JarFile getJar(URL url){
-
         try {
 
             JarFile jarFile = jarFileMap.get(url.toString());
 
             if (jarFile == null) {
-                jarFile = new JarFile(new File(url.getFile()));
+                File file = null;
+                if(!url.getProtocol().equals("file")){
+                    throw new JarexException(String.format("URL protocol not supported : %s",
+                            url.getProtocol()));
+                }
+
+                file = new File(url.toURI());
+                if(file.exists()&&file.isDirectory())
+                    return null;
+
+                jarFile = new JarFile(file);
                 jarFileMap.put(url.toString(), jarFile);
             }
 
             return jarFile;
 
-        }catch (IOException ex){
+        }catch (FileNotFoundException ex){
 
-            throw new JarexException(String.format("Failed to get JarFile instance for URL: %s",url));
+            LOG.warn("Jar File not found : "+url.toString());
+            return null;
+
+        }catch (IOException | URISyntaxException ex){
+
+            throw new JarexException(String.format("Failed to get JarFile instance for URL: %s",url),ex);
 
         }
     }

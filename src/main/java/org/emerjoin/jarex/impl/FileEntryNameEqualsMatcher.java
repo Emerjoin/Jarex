@@ -29,6 +29,9 @@ public class FileEntryNameEqualsMatcher implements Matcher {
 
         FileEntryNameEqualsQuery q = (FileEntryNameEqualsQuery) query;
         JarFile jarFile = context.getJar(url);
+        if(jarFile==null)
+            return false;
+
         String path = q.getPath();
 
         JarEntry entry = jarFile.getJarEntry(path);

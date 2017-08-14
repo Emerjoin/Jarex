@@ -31,6 +31,9 @@ public class FileEntryNameEndsWithMatcher implements Matcher {
 
         FileEntryNameEndsWithQuery q = (FileEntryNameEndsWithQuery) query;
         JarFile jarFile = context.getJar(url);
+        if(jarFile==null)
+            return false;
+
         String part = q.getPart();
 
         List<JarEntry> entryList = jarFile.stream().filter(entry -> entry.getName().endsWith(part) && !entry.isDirectory())
